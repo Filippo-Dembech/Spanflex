@@ -8,13 +8,13 @@
 
 @layer base {
   body {
-    @apply font-montserrat text-[0.8rem] text-stone-700;
+    @apply font-montserrat  text-stone-700;
   }
 }
 
 @layer components {
   .page {
-    @apply relative flex h-screen flex-col items-center justify-center bg-yellow-50 z-0;
+    @apply relative h-screen bg-yellow-50 z-0;
   }
 
 }

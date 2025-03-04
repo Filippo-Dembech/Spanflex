@@ -25,7 +25,7 @@ function UserParametersProvider({ children }) {
 
 function useUserParameters() {
     const context = useContext(UserParametersContext);
-    if (context === "undefined") throw new Error("useUserParameters() is used outside UserParametersContext");
+    if (context === undefined) throw new Error("useUserParameters() is used outside UserParametersContext");
     return context;
 }
 

@@ -1,14 +1,37 @@
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { usePageTurner } from "../context/PageContext"
-import { pages } from "./pages";
+import { useUserParameters } from "../context/UserParametersContext";
+import PageLayout from "./PageLayout";
 
 export default function SettingsPage() {
-    
-    const { setCurrentPage } = usePageTurner();
-    return (
-        <div className="page">
-            <button onClick={() => setCurrentPage(pages.homepage)} className="absolute top-3 left-3 text-xl bg-amber-400 text-amber-50 p-1 rounded-full hover:bg-amber-500 duration-200"><IoMdArrowRoundBack /></button>
-            SETTINGS PAGE
-        </div>
-    )
+  const { span, setSpan, showSpeed, setShowSpeed, isNumeric, setIsNumeric } =
+    useUserParameters();
+
+  return (
+    <PageLayout gobackButton>
+      <h2>Settings</h2>
+      <label htmlFor="span">Span</label>
+      <input
+        onChange={(e) => setSpan(Number(e.target.value))}
+        type="number"
+        placeholder={`current = ${span}`}
+        name="span"
+        id="span"
+      />
+      <label htmlFor="interval">Interval</label>
+      <input
+        onChange={(e) => setShowSpeed(Number(e.target.value))}
+        type="number"
+        placeholder={`current = ${showSpeed}s`}
+        name="interval"
+        id="interval"
+      />
+      <label htmlFor="numeric">Numeric</label>
+      <input
+        onClick={(e) => setIsNumeric(e.target.checked)}
+        type="checkbox"
+        checked={isNumeric}
+        name="numeric"
+        id="numeric"
+      />
+    </PageLayout>
+  );
 }

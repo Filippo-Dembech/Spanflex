@@ -1,4 +1,4 @@
 export const pages = {
-    homepage: 0,
-    settingsPage: 1,
+    homepage: "homepage",
+    settingsPage: "settingsPage",
 }

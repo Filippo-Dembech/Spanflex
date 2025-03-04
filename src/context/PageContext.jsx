@@ -5,11 +5,23 @@ const PageTurnerContext = createContext();
 
 function PageTurnerProvider({children}) {
     const [ currentPage, setCurrentPage ] = useState(pages.homepage);
+    const [ previousPages, setPreviousPages ] = useState([]);
+
+    function setPage(page) {
+        setPreviousPages(curr => [ ...curr, currentPage]);
+        setCurrentPage(page);
+    }
+
+    function goBack() {
+        if (!previousPages.length) return
+        setCurrentPage(previousPages.pop());
+    }
 
     return (
         <PageTurnerContext.Provider value={{
             currentPage,
-            setCurrentPage,
+            setPage,
+            goBack
         }}>
             {children}
         </PageTurnerContext.Provider>

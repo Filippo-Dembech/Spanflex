@@ -4,24 +4,25 @@ import { IoSchool } from "react-icons/io5";
 import { IoSettingsSharp } from "react-icons/io5";
 import { usePageTurner } from "../context/PageContext";
 import { pages } from "./pages";
+import PageLayout from "./PageLayout";
 
 export default function Homepage() {
-  const { setCurrentPage } = usePageTurner();
+  const { setPage } = usePageTurner();
 
   return (
-    <div className="page overflow-hidden">
-      <img
-        src="/src/assets/brain.svg"
-        className="absolute z-[-1] block w-[600px] max-w-[1000px] opacity-7 sm:w-[70vw]"
-      />
+    <PageLayout className="flex flex-col items-center justify-center" sideElement={
       <Button
-        onClick={() => setCurrentPage(pages.settingsPage)}
+        onClick={() => setPage(pages.settingsPage)}
         invertColors
-        className="absolute top-4 right-4"
         icon={<IoSettingsSharp />}
       >
         Settings
       </Button>
+    }>
+      <img
+        src="/src/assets/brain.svg"
+        className="absolute top-[50%] -translate-y-1/2 z-[-1] block w-[500px] max-w-[1000px] opacity-7 sm:w-[70vw]"
+      />
       <h1 className="main-header font-playfair mb-2 text-[clamp(4rem,10vw+1rem,6rem)] font-bold">
         SpanFlex
       </h1>
@@ -45,6 +46,6 @@ export default function Homepage() {
           Quick Start
         </Button>
       </div>
-    </div>
+    </PageLayout>
   );
 }
