@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-playfair: "Playfair Display", serif;
+}
+
+@layer base {
+  body {
+    @apply font-montserrat text-[0.8rem] text-stone-700;
+  }
+}
+
+@layer components {
+  .page {
+    @apply relative flex h-screen flex-col items-center justify-center bg-yellow-50 z-0;
+  }
+
+}
