@@ -9,9 +9,12 @@ function App() {
   
   const { currentPage } = usePageTurner()
   
+  /*
   if (currentPage === pages.settingsPage) return <SettingsPage />
   if (currentPage === pages.tutorialPage) return <TutorialPage />
-  
+  */
+
+  return <TutorialPage />
   return <Homepage />
 
 }
