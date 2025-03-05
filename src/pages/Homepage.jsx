@@ -32,7 +32,7 @@ export default function Homepage() {
       </h2>
       <div className="mt-8 flex w-40 max-w-[400px] flex-col justify-center gap-4 sm:w-[60vw] sm:flex-row md:mt-17">
         <Button
-          onClick={() => alert("first time?")}
+          onClick={() => setPage(pages.tutorialPage)}
           className="w-full"
           icon={<IoSchool />}
         >

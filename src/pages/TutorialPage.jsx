@@ -1,9 +1,9 @@
 import PageLayout from './PageLayout';
 
-export default function ExplanationPage() {
+export default function TutorialPage() {
     return (
         <PageLayout gobackButton>
-            <div>Explanation Page</div>
+            <div>Tutorial Page</div>
         </PageLayout>
     )
 }
