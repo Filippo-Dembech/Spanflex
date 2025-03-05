@@ -20,11 +20,13 @@ export default function Stepper({ children }) {
   if (currentStepIndex >= steps.length) return;
 
   const currentStep = steps[currentStepIndex];
-    
-  const stepStyle = "flex flex-col animate-slide-in m-7 max-w-200 flex-grow relative items-center justify-center";
+
+  const stepStyle =
+    "flex flex-col animate-slide-in m-7 max-w-200 flex-grow relative items-center justify-center";
   const buttonStyle = "self-end mt-4 md:mx-5 md:text-xl";
 
-  if (currentStep.type.name === "ConditionalStep")
+  if (currentStep.type.name === "ConditionalStep") {
+    currentStep.props.onMount();
     return (
       <div className={stepStyle} key={currentStepIndex}>
         {currentStep}
@@ -39,6 +41,7 @@ export default function Stepper({ children }) {
         )}
       </div>
     );
+  }
 
   return (
     <div className={stepStyle} key={currentStepIndex}>
