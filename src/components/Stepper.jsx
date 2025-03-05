@@ -21,8 +21,8 @@ export default function Stepper({ children }) {
 
   const currentStep = steps[currentStepIndex];
     
-  const stepStyle = "bg-blue-300 flex animate-slide-in m-7 flex-grow relative items-center justify-center";
-  const buttonStyle = "absolute bottom-3 right-3";
+  const stepStyle = "flex flex-col animate-slide-in m-7 max-w-200 flex-grow relative items-center justify-center";
+  const buttonStyle = "self-end mt-4 md:mx-5 md:text-xl";
 
   if (currentStep.type.name === "ConditionalStep")
     return (

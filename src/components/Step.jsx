@@ -1,6 +1,6 @@
 export default function Step({children}) {
     return (
-        <div className="bg-red-300">
+        <div className="size-full">
             {children}
         </div>
     )
