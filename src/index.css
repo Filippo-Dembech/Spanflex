@@ -8,7 +8,7 @@
 
 @layer base {
   body {
-    @apply font-montserrat  text-stone-700;
+    @apply font-montserrat text-stone-700;
   }
 }
 
