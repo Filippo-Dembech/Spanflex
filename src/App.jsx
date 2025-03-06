@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Homepage from "./pages/Homepage"
 import SettingsPage from "./pages/SettingsPage"
 import { pages } from "./pages/pages";
@@ -9,12 +8,9 @@ function App() {
   
   const { currentPage } = usePageTurner()
   
-  /*
   if (currentPage === pages.settingsPage) return <SettingsPage />
   if (currentPage === pages.tutorialPage) return <TutorialPage />
-  */
 
-  return <TutorialPage />
   return <Homepage />
 
 }

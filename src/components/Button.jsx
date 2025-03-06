@@ -1,30 +1,31 @@
 export default function Button({
   onClick,
   icon,
-  children,
   className,
   invertColors,
+  href,
+  children,
 }) {
   const baseStyle =
     "flex items-center justify-center gap-2 rounded-xl border-2 border-amber-400 px-2 py-1 duration-200";
+  const buttonStyle = invertColors
+    ? `group bg-amber-400 text-amber-50 hover:bg-amber-50 hover:text-amber-400 ${baseStyle} ${className}`
+    : `group hover:bg-amber-400 hover:text-amber-50 ${baseStyle} ${className}`;
+  const iconStyle = invertColors
+    ? "text-amber-50 group-hover:text-amber-400"
+    : "text-amber-400 group-hover:text-amber-50";
 
-  if (invertColors)
+  if (href)
     return (
-      <button
-        onClick={onClick}
-        className={`group bg-amber-400 text-amber-50 hover:bg-amber-50 hover:text-amber-400 ${baseStyle} ${className}`}
-      >
-        {children}
-        <span className="text-amber-50 group-hover:text-amber-400">{icon}</span>
-      </button>
+      <a className={buttonStyle} href={href} target="_blank">
+        <span className={iconStyle}>{icon}</span>
+      </a>
     );
+
   return (
-    <button
-      onClick={onClick}
-      className={`group hover:bg-amber-400 hover:text-amber-50 ${baseStyle} ${className}`}
-    >
+    <button onClick={onClick} className={buttonStyle}>
       {children}
-      <span className="text-amber-400 group-hover:text-amber-50">{icon}</span>
+      <span className={iconStyle}>{icon}</span>
     </button>
   );
 }
