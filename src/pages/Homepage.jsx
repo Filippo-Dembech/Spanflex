@@ -14,7 +14,7 @@ export default function Homepage() {
       backgroundSrc="/src/assets/brain.svg"
       className="flex flex-col items-center justify-center"
     >
-      <Button className="absolute top-3 right-3" href="https://en.wikipedia.org/wiki/Memory_span" icon={<FaQuestion/>} invertColors></Button>
+      <Button className="absolute top-3 right-3 hover:before:content-['Wikipedia'] hover:before:text-xs" href="https://en.wikipedia.org/wiki/Memory_span" icon={<FaQuestion/>} invertColors></Button>
       <h1 className="main-header font-playfair mb-2 text-[clamp(4rem,10vw+1rem,6rem)] font-bold">
         SpanFlex
       </h1>
