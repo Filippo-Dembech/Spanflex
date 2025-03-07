@@ -2,26 +2,11 @@ import PageLayout from "./PageLayout";
 import Stepper from "../components/Stepper";
 import ConditionalStep from "../components/ConditionalStep";
 import Step from "../components/Step";
-import { useRef, useState } from "react";
+import SpanGame from "../features/game/SpanGame";
+import { useState } from "react";
 
 export default function TutorialPage() {
   const [condition, setCondition] = useState(false);
-  const [countdownIndex, setCountdownIndex] = useState(0);
-  const countdown = ["3", "2", "1", "START", "MEMORIZE"];
-  const countdownId = useRef(null);
-
-  function stopCountdown() {
-    clearInterval(countdownId.current);
-  }
-
-  function startCountdown() {
-    if (countdownIndex >= countdown.length) stopCountdown();
-    if (!countdownId.current) {
-      countdownId.current = setInterval(() => {
-        setCountdownIndex((curr) => curr + 1);
-      }, 1000);
-    }
-  }
 
   return (
     <PageLayout
@@ -79,10 +64,8 @@ export default function TutorialPage() {
             start the test...
           </p>
         </Step>
-        <ConditionalStep condition={condition} onMount={startCountdown}>
-            <p className="text-2xl">
-                {countdown[countdownIndex]}
-            </p>
+        <ConditionalStep condition={condition}>
+            <SpanGame span={3}/>
         </ConditionalStep>
       </Stepper>
     </PageLayout>

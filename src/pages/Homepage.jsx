@@ -1,7 +1,6 @@
 import Button from "../components/Button";
 import { FaPlay, FaQuestion } from "react-icons/fa";
 import { IoSchool } from "react-icons/io5";
-import { IoSettingsSharp } from "react-icons/io5";
 import { usePageTurner } from "../context/PageContext";
 import { pages } from "./pages";
 import PageLayout from "./PageLayout";

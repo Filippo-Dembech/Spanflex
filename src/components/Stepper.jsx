@@ -26,7 +26,6 @@ export default function Stepper({ children }) {
   const buttonStyle = "self-end mt-4 md:mx-5 md:text-xl";
 
   if (currentStep.type.name === "ConditionalStep") {
-    currentStep.props.onMount();
     return (
       <div className={stepStyle} key={currentStepIndex}>
         {currentStep}
