@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 import { usePageTurner } from "../../context/PageContext";
 import { pages } from "../../pages/pages";
 
-export default function SpanGame({ span, interval, onIncreaseSpan }) {
+export default function SpanGame({ span, interval, onIncreaseSpan, onCantRemember }) {
     const [gameStatus, setGameStatus] = useState(() => status.idle);
     const { setPage } = usePageTurner();
 
@@ -60,7 +60,7 @@ export default function SpanGame({ span, interval, onIncreaseSpan }) {
                             setGameStatus(status.win);
                         }}
                     />
-                    {gameStatus !== status.win && <Button onClick={() => setPage(pages.homepage)}>Can't Remember</Button>}
+                    {gameStatus !== status.win && <Button onClick={() => onCantRemember()}>Can't Remember</Button>}
                     {gameStatus === status.win && (
                         <motion.div initial={{ scale: 0, opacity: 0}} animate={{ scale: 1, opacity: 1}} className="flex flex-col space-y-3">
                             <p className="mt-5 text-2xl">

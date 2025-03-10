@@ -30,7 +30,7 @@ export default function Homepage() {
           First Time?
         </Button>
         <Button
-          onClick={() => alert("quick start")}
+          onClick={() => setPage(pages.dojoPage)}
           className="w-full"
           icon={<FaPlay />}
         >

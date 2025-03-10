@@ -5,11 +5,14 @@ import Step from "../components/Step";
 import SpanGame from "../features/game/SpanGame";
 import { motion } from "motion/react";
 import { useState } from "react";
+import { usePageTurner } from "../context/PageContext";
+import { pages } from "./pages";
 
 export default function TutorialPage() {
     const [condition, setCondition] = useState(false);
     const [gameIsOn, setGameIsOn] = useState(false);
     const [span, setSpan] = useState(3);
+    const { setPage } = usePageTurner();
 
     return (
         <PageLayout
@@ -104,8 +107,15 @@ export default function TutorialPage() {
                         span={span}
                         interval={1000}
                         onIncreaseSpan={() => setSpan((curr) => curr + 1)}
+                        onCantRemember={() => setCondition(true)}
                     />
                 </ConditionalStep>
+                <Step continueAction={() => setPage(pages.dojo)}>
+                  <h2 className="mb-2 text-3xl font-bold">Your Span is {span}!</h2>
+                  <p>You have tested your span range and when you had to memorize {span + 1} items you had problems memorizing them.</p>
+                  <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>
+                  <p>If you want to practice more your span capabilities and wide your span range you can click the <code>Continue</code> button below to go to the practice Dojo and enhance your memory.</p>
+                </Step>
             </Stepper>
         </PageLayout>
     );
