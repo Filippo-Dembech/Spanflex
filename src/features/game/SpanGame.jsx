@@ -1,61 +1,76 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { gameStatus as status } from "./gameStatus";
-import { useCountdown } from "./useCountdown";
-import { generateRandomDigits, separateDigits } from "./helpers";
+import { generateRandomDigits } from "./helpers";
 import SpanInputs from "./SpanInputs";
 import Button from "../../components/Button";
+import IntervalPresenter from "../../IntervalPresenter";
+import { motion } from "motion/react";
+import { usePageTurner } from "../../context/PageContext";
+import { pages } from "../../pages/pages";
 
-export default function SpanGame({ span, interval }) {
+export default function SpanGame({ span, interval, onIncreaseSpan }) {
     const [gameStatus, setGameStatus] = useState(() => status.idle);
-    const [digitIndex, setDigitIndex] = useState(0);
+    const { setPage } = usePageTurner();
 
-    const countdown = useCountdown(() => {
-        if (gameStatus === status.idle) setGameStatus(status.on);
-    });
+    const countdown = [
+        {
+            duration: 1000,
+            body: <p className="text-[3rem]">3</p>,
+        },
+        {
+            duration: 1000,
+            body: <p className="text-[3rem]">2</p>,
+        },
+        {
+            duration: 1000,
+            body: <p className="text-[3rem]">1</p>,
+        },
+        {
+            duration: 1000,
+            body: <p className="text-[3rem]">MEMORIZE</p>,
+        },
+    ];
 
     const digits = useRef(generateRandomDigits(span));
-    const separatedDigits = useRef(separateDigits(digits.current));
-
-    useEffect(() => {
-        if (gameStatus !== status.on) return;
-        if (digitIndex >= separatedDigits.length) return;
-
-        const intervalId = setInterval(() => {
-            if (digitIndex === separatedDigits.current.length - 1)
-                setGameStatus(status.input);
-            setDigitIndex((curr) => curr + 1);
-        }, 1000);
-
-        return () => clearInterval(intervalId);
-    }, [gameStatus, digitIndex]);
-
-    if (gameStatus === status.idle)
-        return <div className="text-4xl">{countdown}</div>;
-
-    if (gameStatus === status.on)
-        return (
-            <div className="text-[5rem] font-bold" key={digitIndex}>
-                {separatedDigits.current[digitIndex]}
-            </div>
-        );
+    const spanItems = useRef(
+        digits.current.map((digit, i) => ({
+            duration: interval, // interval here
+            body: (
+                <motion.p
+                    key={i}
+                    className="text-[6rem] font-bold"
+                    initial={{ transform: "translateY(-10px)" }}
+                    animate={{ transform: "translateY(0)" }}
+                >
+                    {digit}
+                </motion.p>
+            ),
+        })),
+    );
 
     return (
-        <div className="flex flex-col space-y-3 text-center">
-            <h2>Enter the digits in the right order:</h2>
-            <SpanInputs
-                values={digits.current}
-                onRightInput={() => {
-                    setGameStatus(status.win);
-                }}
-            />
-            {status.win && (
-                <div className="flex flex-col space-y-3">
-                    <p className="mt-5 text-2xl">
-                        CONGRATULATIONS! You have span of {span}
-                    </p>
-                    <Button>Increase Span</Button>
+        <IntervalPresenter
+            timedComponents={[...countdown, ...spanItems.current]}
+            lastComponent={
+                <div className="flex flex-col space-y-3 text-center flex-wrap">
+                    <h2>Enter the digits in the right order:</h2>
+                    <SpanInputs
+                        values={digits.current}
+                        onRightInput={() => {
+                            setGameStatus(status.win);
+                        }}
+                    />
+                    {gameStatus !== status.win && <Button onClick={() => setPage(pages.homepage)}>Can't Remember</Button>}
+                    {gameStatus === status.win && (
+                        <motion.div initial={{ scale: 0, opacity: 0}} animate={{ scale: 1, opacity: 1}} className="flex flex-col space-y-3">
+                            <p className="mt-5 text-2xl">
+                                CONGRATULATIONS! You have span of {span}
+                            </p>
+                            <Button onClick={onIncreaseSpan}>Increase Span</Button>
+                        </motion.div>
+                    )}
                 </div>
-            )}
-        </div>
+            }
+        />
     );
 }

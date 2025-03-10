@@ -8,6 +8,7 @@ export default function SpanInputs({ values, onRightInput }) {
         <div className="mt-5 flex justify-around">
             {values.map((value, i) => (
                 <SpanInput onChange={(e) => {
+                    if (e.target.value === "") return;
                     if (Number(e.target.value) === Number(value)) {
                         correctValues.current[i] = true;
                         if (correctValues.current.every(val => val === true)) {
