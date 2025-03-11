@@ -110,7 +110,7 @@ export default function TutorialPage() {
                         onCantRemember={() => setCondition(true)}
                     />
                 </ConditionalStep>
-                <Step continueAction={() => setPage(pages.dojo)}>
+                <Step continueAction={() => setPage(pages.dojoPage)}>
                   <h2 className="mb-2 text-3xl font-bold">Your Span is {span}!</h2>
                   <p>You have tested your span range and when you had to memorize {span + 1} items you had problems memorizing them.</p>
                   <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>

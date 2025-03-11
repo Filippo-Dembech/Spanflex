@@ -21,7 +21,7 @@
 
 @layer base {
   body {
-    @apply font-montserrat text-stone-700;
+    @apply font-montserrat text-stone-700 bg-amber-50;
   }
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {

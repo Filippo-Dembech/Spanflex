@@ -5,12 +5,9 @@ import SpanInputs from "./SpanInputs";
 import Button from "../../components/Button";
 import IntervalPresenter from "../../IntervalPresenter";
 import { motion } from "motion/react";
-import { usePageTurner } from "../../context/PageContext";
-import { pages } from "../../pages/pages";
 
 export default function SpanGame({ span, interval, onIncreaseSpan, onCantRemember }) {
     const [gameStatus, setGameStatus] = useState(() => status.idle);
-    const { setPage } = usePageTurner();
 
     const countdown = [
         {

@@ -1,5 +1,9 @@
+import PageLayout from "./PageLayout";
+
 export default function DojoPage() {
     return (
-        <h1>Dojo Page</h1>
+        <PageLayout gobackButton>
+            <h1>Dojo Page</h1>
+        </PageLayout>
     )
 }
