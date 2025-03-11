@@ -6,7 +6,14 @@ import Button from "../../components/Button";
 import IntervalPresenter from "../../IntervalPresenter";
 import { motion } from "motion/react";
 
-export default function SpanGame({ span, interval, onIncreaseSpan, onCantRemember }) {
+export default function SpanGame({
+    span,
+    interval,
+    onIncreaseSpan,
+    onCantRemember,
+    onRetry,
+    tutorial
+}) {
     const [gameStatus, setGameStatus] = useState(() => status.idle);
 
     const countdown = [
@@ -44,12 +51,12 @@ export default function SpanGame({ span, interval, onIncreaseSpan, onCantRemembe
             ),
         })),
     );
-
-    return (
+    
+    if (tutorial) return (
         <IntervalPresenter
             timedComponents={[...countdown, ...spanItems.current]}
             lastComponent={
-                <div className="flex flex-col space-y-3 text-center flex-wrap">
+                <div className="flex flex-col flex-wrap space-y-3 text-center">
                     <h2>Enter the digits in the right order:</h2>
                     <SpanInputs
                         values={digits.current}
@@ -57,15 +64,58 @@ export default function SpanGame({ span, interval, onIncreaseSpan, onCantRemembe
                             setGameStatus(status.win);
                         }}
                     />
-                    {gameStatus !== status.win && <Button onClick={() => onCantRemember()}>Can't Remember</Button>}
+                    {gameStatus !== status.win && (
+                        <Button onClick={() => onCantRemember()}>
+                            Can't Remember
+                        </Button>
+                    )}
                     {gameStatus === status.win && (
-                        <motion.div initial={{ scale: 0, opacity: 0}} animate={{ scale: 1, opacity: 1}} className="flex flex-col space-y-3">
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="flex flex-col space-y-3"
+                        >
                             <p className="mt-5 text-2xl">
                                 CONGRATULATIONS! You have span of {span}
                             </p>
-                            <Button onClick={onIncreaseSpan}>Increase Span</Button>
+                            <Button onClick={onIncreaseSpan}>
+                                Increase Span
+                            </Button>
                         </motion.div>
                     )}
+                </div>
+            }
+        />
+    );
+    return (
+        <IntervalPresenter
+            timedComponents={[...countdown, ...spanItems.current]}
+            lastComponent={
+                <div className="flex flex-col flex-wrap space-y-3 text-center">
+                    <h2>Enter the digits in the right order:</h2>
+                    <SpanInputs
+                        values={digits.current}
+                        onRightInput={() => {
+                            setGameStatus(status.win);
+                        }}
+                    />
+                    {gameStatus === status.win && (
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            className="flex flex-col space-y-3"
+                        >
+                            <p className="mt-5 text-2xl">
+                                CONGRATULATIONS! You have span of {span}
+                            </p>
+                            <Button onClick={onIncreaseSpan}>
+                                Increase Span
+                            </Button>
+                        </motion.div>
+                    )}
+                    <Button onClick={() => onRetry()}>
+                        Retry
+                    </Button>
                 </div>
             }
         />

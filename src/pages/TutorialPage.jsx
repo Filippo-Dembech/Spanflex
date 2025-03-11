@@ -103,6 +103,7 @@ export default function TutorialPage() {
                     onMount={() => setGameIsOn(true)}
                 >
                     <SpanGame
+                        tutorial
                         key={span}
                         span={span}
                         interval={1000}
