@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "../components/Button";
 import { useUserParameters } from "../context/UserParametersContext";
 import PageLayout from "./PageLayout";
+import { FaCheckCircle } from "react-icons/fa";
+import { useFeedback } from '../hooks/useFeedback';
 
 export default function SettingsPage() {
     const { span, setSpan, showSpeed, setShowSpeed, isNumeric, setIsNumeric } =
         useUserParameters();
-    const [ inputSpan, setInputSpan ] = useState(3);
-    const [ inputSpanInterval, setInputSpanInterval] = useState(1000);
+    const [inputSpan, setInputSpan] = useState(span);
+    const [inputSpanInterval, setInputSpanInterval] = useState(showSpeed);
+    const [isFeedbacking, giveFeedback] = useFeedback();
+
+    const spanRef = useRef();
+    const intervalRef = useRef();
+
 
     return (
         <PageLayout gobackButton className="px-8 py-3">
@@ -15,8 +22,11 @@ export default function SettingsPage() {
             <div className="flex flex-col space-y-3">
                 <label htmlFor="span">Span</label>
                 <input
+                    ref={spanRef}
                     className="rounded-full bg-white px-5 py-2"
-                    onChange={(e) => setInputSpan(Number(e.target.value))}
+                    onChange={(e) =>
+                        e.target.value && setInputSpan(Number(e.target.value))
+                    }
                     type="number"
                     placeholder={`current = ${span}`}
                     name="span"
@@ -24,10 +34,14 @@ export default function SettingsPage() {
                 />
                 <label htmlFor="interval">Interval</label>
                 <input
+                    ref={intervalRef}
                     className="rounded-full bg-white px-5 py-2"
-                    onChange={(e) => setInputSpanInterval(Number(e.target.value))}
+                    onChange={(e) =>
+                        e.target.value &&
+                        setInputSpanInterval(Number(e.target.value) * 1000)
+                    }
                     type="number"
-                    placeholder={`current = ${showSpeed}s`}
+                    placeholder={`current = ${showSpeed / 1000}s`}
                     name="interval"
                     id="interval"
                 />
@@ -35,17 +49,26 @@ export default function SettingsPage() {
                     <label htmlFor="numeric">Numeric</label>
                     <input
                         className="scale-150 accent-amber-300"
-                        onClick={(e) => setIsNumeric(e.target.checked)}
+                        onChange={(e) => setIsNumeric(e.target.checked)}
                         type="checkbox"
                         checked={isNumeric}
                         name="numeric"
                         id="numeric"
                     />
                 </div>
-                <Button invertColors onClick={() => {
-                  setSpan(inputSpan);
-                  setShowSpeed(inputSpanInterval);
-                }}>Save Settings</Button>
+                <Button
+                    invertColors
+                    className={isFeedbacking && "bg-lime-100 border-lime-400 text-lime-400 hover:text-lime-400"}
+                    onClick={() => {
+                        giveFeedback();
+                        setSpan(inputSpan);
+                        setShowSpeed(inputSpanInterval);
+                        spanRef.current.value = "";
+                        intervalRef.current.value = "";
+                    }}
+                >
+                    {isFeedbacking ? <span className="flex items-center gap-3"><FaCheckCircle /> Settings saved</span> : "Save Settings"}
+                </Button>
             </div>
         </PageLayout>
     );
