@@ -38,13 +38,13 @@ export default function SpanGame({
     const digits = useRef(generateRandomDigits(span));
     const spanItems = useRef(
         digits.current.map((digit, i) => ({
-            duration: interval, // interval here
+            duration: interval,
             body: (
                 <motion.p
                     key={i}
                     className="text-[6rem] font-bold"
-                    initial={{ transform: "translateY(-10px)" }}
-                    animate={{ transform: "translateY(0)" }}
+                    initial={{ y: -10 }}
+                    animate={{ y: 0 }}
                 >
                     {digit}
                 </motion.p>
@@ -59,13 +59,14 @@ export default function SpanGame({
                 <div className="flex flex-col flex-wrap space-y-3 text-center">
                     <h2>Enter the digits in the right order:</h2>
                     <SpanInputs
+                        className="gap-3 flex-wrap max-w-100"
                         values={digits.current}
                         onRightInput={() => {
                             setGameStatus(status.win);
                         }}
                     />
                     {gameStatus !== status.win && (
-                        <Button onClick={() => onCantRemember()}>
+                        <Button className="w-70 md:w-100" onClick={() => onCantRemember()}>
                             Can't Remember
                         </Button>
                     )}
@@ -75,10 +76,11 @@ export default function SpanGame({
                             animate={{ scale: 1, opacity: 1 }}
                             className="flex flex-col space-y-3"
                         >
-                            <p className="mt-5 text-2xl">
-                                CONGRATULATIONS! You have span of {span}
+                            <p className="mt-5 text-xl">CONGRATULATIONS!</p>
+                            <p className="mb-4">
+                                You have span of {span}
                             </p>
-                            <Button onClick={onIncreaseSpan}>
+                            <Button className="w-70 md:w-100" onClick={onIncreaseSpan}>
                                 Increase Span
                             </Button>
                         </motion.div>
@@ -91,9 +93,10 @@ export default function SpanGame({
         <IntervalPresenter
             timedComponents={[...countdown, ...spanItems.current]}
             lastComponent={
-                <div className="flex flex-col flex-wrap space-y-3 text-center">
+                <div className="flex flex-col flex-wrap space-y-3 text-center px-10 items-center">
                     <h2>Enter the digits in the right order:</h2>
                     <SpanInputs
+                        className="gap-3 flex-wrap max-w-100"
                         values={digits.current}
                         onRightInput={() => {
                             setGameStatus(status.win);
@@ -103,17 +106,18 @@ export default function SpanGame({
                         <motion.div
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
-                            className="flex flex-col space-y-3"
+                            className="flex flex-col space-y-3 items-center"
                         >
-                            <p className="mt-5 text-2xl">
-                                CONGRATULATIONS! You have span of {span}
+                            <p className="mt-5 text-xl sm:text-2xl">CONGRATULATIONS!</p>
+                            <p className="mb-4">
+                                You have span of {span}
                             </p>
-                            <Button onClick={onIncreaseSpan}>
+                            <Button className="w-70 md:w-100" onClick={onIncreaseSpan}>
                                 Increase Span
                             </Button>
                         </motion.div>
                     )}
-                    <Button onClick={() => onRetry()}>
+                    <Button className="w-70 md:w-100" onClick={() => onRetry()}>
                         Retry
                     </Button>
                 </div>

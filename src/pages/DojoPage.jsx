@@ -5,11 +5,11 @@ import SpanGame from "../features/game/SpanGame";
 import { useState } from "react";
 
 export default function DojoPage() {
-    const [ attempts, setAttemps] = useState(0);
+    const [attempts, setAttemps] = useState(0);
     const { span, increaseSpan, showSpeed } = useUserParameters();
     return (
         <PageLayout className="flex items-center justify-center" gobackButton>
-            <p key={span} className="absolute top-5 right-5">
+            <div className="absolute top-5 right-5">
                 SPAN:{" "}
                 <motion.div
                     key={span}
@@ -20,16 +20,17 @@ export default function DojoPage() {
                 >
                     {span}
                 </motion.div>
-            </p>
+            </div>
             <SpanGame
                 key={span + attempts}
                 span={span}
                 interval={showSpeed}
                 onIncreaseSpan={() => {
                     increaseSpan();
+                    setAttemps(curr => curr + 1)
                 }}
                 onRetry={() => {
-                    setAttemps(curr => curr + 1)
+                    setAttemps((curr) => curr + 1);
                 }}
             />
         </PageLayout>

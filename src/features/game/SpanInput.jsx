@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SpanInput({ expectedValue, onChange }) {
+export default function SpanInput({ expectedValue, onChange, autofocus, ref }) {
     const [isCorrect, setIsCorrect] = useState(false);
     const [isActive, setIsActive] = useState(false);
 
@@ -13,6 +13,8 @@ export default function SpanInput({ expectedValue, onChange }) {
 
     return (
         <input
+            ref={ref}
+            autoFocus={autofocus}
             onChange={(e) => {
                 if (e.target.value === "") return;
                 onChange(e);

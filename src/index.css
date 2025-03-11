@@ -20,6 +20,9 @@
 }
 
 @layer base {
+  ::selection {
+    @apply bg-amber-400 text-amber-100
+  }
   body {
     @apply font-montserrat text-stone-700 bg-amber-50;
   }
