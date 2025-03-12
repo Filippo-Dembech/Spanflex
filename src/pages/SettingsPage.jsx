@@ -33,7 +33,7 @@ export default function SettingsPage() {
                         label="Interval"
                         ref={intervalRef}
                         onChange={(input) => setInputSpanInterval(input * 1000)}
-                        placeholder={`current = ${spanInterval / 1000}`}
+                        placeholder={`current = ${spanInterval / 1000}s`}
                     />
                     <Checkbox
                         label="Numeric"
