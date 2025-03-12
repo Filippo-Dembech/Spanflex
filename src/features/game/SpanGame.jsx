@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { gameStatus as status } from "./gameStatus";
-import { generateRandomDigits } from "./helpers";
+import { generateRandomDigits } from "../../utils/generateRandomDigits";
 import SpanInputs from "./SpanInputs";
 import Button from "../../components/Button";
 import IntervalPresenter from "../../IntervalPresenter";
