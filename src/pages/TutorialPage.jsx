@@ -22,7 +22,7 @@ export default function TutorialPage() {
             className="mx-auto flex flex-col overflow-x-hidden overflow-y-auto"
             sideElement={
                 gameIsOn && (
-                    <p key={tutorialSpan} className="absolute top-5 right-5">
+                    <div key={tutorialSpan} className="absolute top-5 right-5">
                         SPAN:{" "}
                         <motion.div
                             key={tutorialSpan}
@@ -33,7 +33,7 @@ export default function TutorialPage() {
                         >
                             {tutorialSpan}
                         </motion.div>
-                    </p>
+                    </div>
                 )
             }
         >
@@ -75,7 +75,7 @@ export default function TutorialPage() {
                         </li>
                     </ul>
                 </Step>
-                <Step>
+                <Step onContinue={() => setGameIsOn(true)}>
                     <h2 className="mb-2 text-3xl font-bold">
                         Let's Test Your Span
                     </h2>
@@ -102,7 +102,6 @@ export default function TutorialPage() {
                 </Step>
                 <ConditionalStep
                     condition={condition}
-                    onMount={() => setGameIsOn(true)}
                     onContinue={() => setSpan(tutorialSpan - 1)}
                 >
                     <SpanGame
@@ -114,7 +113,7 @@ export default function TutorialPage() {
                         onCantRemember={() => setCondition(true)}
                     />
                 </ConditionalStep>
-                <Step continueAction={() => setPage(pages.dojoPage)}>
+                <Step onContinue={() => setPage(pages.dojoPage)}>
                   <h2 className="mb-2 text-3xl font-bold">Your Span is {tutorialSpan - 1}!</h2>
                   <p>You have tested your span range and when you had to memorize {tutorialSpan} items you had problems memorizing them. So you can retain {tutorialSpan - 1} digits in mind.</p>
                   <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>

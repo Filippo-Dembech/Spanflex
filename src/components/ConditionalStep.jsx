@@ -1,7 +1,4 @@
-export default function ConditionalStep({onMount, children}) {
-    if (onMount) {
-        onMount();
-    }
+export default function ConditionalStep({children}) {
     return (
         <div>
             {children}

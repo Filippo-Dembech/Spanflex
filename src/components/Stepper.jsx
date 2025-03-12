@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
@@ -21,7 +21,8 @@ export default function Stepper({ children }) {
 
     const currentStep = steps[currentStepIndex];
 
-    const stepStyle = "flex flex-col animate-slide-in m-7 max-w-200 flex-grow relative items-center justify-center";
+    const stepStyle =
+        "flex flex-col animate-slide-in m-7 max-w-200 flex-grow relative items-center justify-center";
     const buttonStyle = "self-end mt-4 md:mx-5 md:text-xl";
 
     if (currentStep.type.name === "ConditionalStep") {
@@ -32,10 +33,9 @@ export default function Stepper({ children }) {
                     <Button
                         className={buttonStyle}
                         onClick={() => {
-                          if (currentStep.props.onContinue) {
-                            currentStep.props.onContinue();
-                          }
-                          setCurrentStepIndex((curr) => curr + 1)
+                            if (currentStep.props.onContinue)
+                                currentStep.props.onContinue();
+                            setCurrentStepIndex((curr) => curr + 1);
                         }}
                         icon={<FaArrowAltCircleRight />}
                     >
@@ -51,11 +51,11 @@ export default function Stepper({ children }) {
             {currentStep}
             <Button
                 className={buttonStyle}
-                onClick={() =>
-                    currentStep.props.continueAction
-                        ? currentStep.props.continueAction()
-                        : setCurrentStepIndex((curr) => curr + 1)
-                }
+                onClick={() => {
+                    if (currentStep.props.onContinue)
+                        currentStep.props.onContinue();
+                    setCurrentStepIndex((curr) => curr + 1);
+                }}
                 icon={<FaArrowAltCircleRight />}
             >
                 Continue
