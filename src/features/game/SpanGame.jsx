@@ -5,6 +5,8 @@ import SpanInputs from "./SpanInputs";
 import Button from "../../components/Button";
 import IntervalPresenter from "../../IntervalPresenter";
 import { motion } from "motion/react";
+import { FaBrain, FaPlus } from "react-icons/fa";
+import { FaRepeat } from "react-icons/fa6";
 
 export default function SpanGame({
     span,
@@ -59,14 +61,17 @@ export default function SpanGame({
                 <div className="flex flex-col flex-wrap space-y-3 text-center">
                     <h2>Enter the digits in the right order:</h2>
                     <SpanInputs
-                        className="gap-3 flex-wrap max-w-100"
+                        className="gap-3 flex-wrap max-w-100 mb-7"
                         values={digits.current}
                         onRightInput={() => {
                             setGameStatus(status.win);
                         }}
                     />
-                    {gameStatus !== status.win && (
-                        <Button className="w-70 m-auto md:w-100" onClick={() => onCantRemember()}>
+                    {gameStatus !== status.win && gameStatus !== status.stop && (
+                        <Button icon={<FaBrain />} className="w-70 m-auto md:w-100" onClick={() => {
+                            setGameStatus(status.stop);
+                            onCantRemember();
+                        }}>
                             Can't Remember
                         </Button>
                     )}
@@ -80,7 +85,7 @@ export default function SpanGame({
                             <p className="mb-4">
                                 You have span of {span}
                             </p>
-                            <Button className="w-70 md:w-100" onClick={onIncreaseSpan}>
+                            <Button icon={<FaPlus />} className="w-70 md:w-100" onClick={onIncreaseSpan}>
                                 Increase Span
                             </Button>
                         </motion.div>
@@ -96,7 +101,7 @@ export default function SpanGame({
                 <div className="flex flex-col flex-wrap space-y-3 text-center px-10 items-center">
                     <h2>Enter the digits in the right order:</h2>
                     <SpanInputs
-                        className="gap-3 flex-wrap max-w-100"
+                        className="gap-3 flex-wrap max-w-100 mb-7"
                         values={digits.current}
                         onRightInput={() => {
                             setGameStatus(status.win);
@@ -112,12 +117,12 @@ export default function SpanGame({
                             <p className="mb-4">
                                 You have span of {span}
                             </p>
-                            <Button className="w-70 md:w-100" onClick={onIncreaseSpan}>
+                            <Button icon={<FaPlus />} className="w-70 md:w-100" onClick={onIncreaseSpan}>
                                 Increase Span
                             </Button>
                         </motion.div>
                     )}
-                    <Button className="w-70 md:w-100" onClick={() => onRetry()}>
+                    <Button icon={<FaRepeat />}className="w-70 md:w-100" onClick={() => onRetry()}>
                         Retry
                     </Button>
                 </div>
