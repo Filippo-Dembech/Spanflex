@@ -3,7 +3,6 @@ import SettingsPage from "./pages/SettingsPage";
 import { pages } from "./pages/pages";
 import { usePageTurner } from "./context/PageContext";
 import TutorialPage from "./pages/TutorialPage";
-import IntervalPresenter from "./IntervalPresenter";
 import DojoPage from "./pages/DojoPage";
 
 function App() {

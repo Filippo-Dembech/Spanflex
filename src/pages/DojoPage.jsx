@@ -1,4 +1,4 @@
-import { useUserParameters } from "../context/UserParametersContext";
+import { useUserParameters } from "../features/parameters/UserParametersContext";
 import { motion } from "motion/react";
 import PageLayout from "./PageLayout";
 import SpanGame from "../features/game/SpanGame";

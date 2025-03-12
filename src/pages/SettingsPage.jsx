@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
 import Button from "../components/Button";
-import { useUserParameters } from "../context/UserParametersContext";
+import { useUserParameters } from "../features/parameters/UserParametersContext";
 import PageLayout from "./PageLayout";
 import { FaCheckCircle } from "react-icons/fa";
 import { useFeedback } from "../hooks/useFeedback";
+import Checkbox from "../components/Checkbox";
 
 export default function SettingsPage() {
     const { span, setSpan, showSpeed, setShowSpeed, isNumeric, setIsNumeric } =
@@ -17,7 +18,7 @@ export default function SettingsPage() {
 
     return (
         <PageLayout gobackButton className="px-8 py-3">
-            <div className="max-w-120 m-auto">
+            <div className="m-auto max-w-120">
                 <h2 className="text-3xl">Settings</h2>
                 <div className="flex flex-col space-y-3">
                     <label htmlFor="span">Span</label>
@@ -46,17 +47,11 @@ export default function SettingsPage() {
                         name="interval"
                         id="interval"
                     />
-                    <div className="flex items-center space-x-2">
-                        <label htmlFor="numeric">Numeric</label>
-                        <input
-                            className="scale-150 accent-amber-300"
-                            onChange={(e) => setIsNumeric(e.target.checked)}
-                            type="checkbox"
-                            checked={isNumeric}
-                            name="numeric"
-                            id="numeric"
-                        />
-                    </div>
+                    <Checkbox
+                        label="Numeric"
+                        onCheck={setIsNumeric}
+                        isChecked={isNumeric}
+                    />
                     <Button
                         invertColors
                         className={
