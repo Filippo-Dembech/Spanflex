@@ -7,11 +7,13 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { usePageTurner } from "../context/PageContext";
 import { pages } from "./pages";
+import { useUserParameters } from "../features/parameters/UserParametersContext";
 
 export default function TutorialPage() {
     const [condition, setCondition] = useState(false);
     const [gameIsOn, setGameIsOn] = useState(false);
-    const [span, setSpan] = useState(3);
+    const [tutorialSpan, setTutorialSpan] = useState(3);
+    const { setSpan } = useUserParameters();
     const { setPage } = usePageTurner();
 
     return (
@@ -20,16 +22,16 @@ export default function TutorialPage() {
             className="mx-auto flex flex-col overflow-x-hidden overflow-y-auto"
             sideElement={
                 gameIsOn && (
-                    <p key={span} className="absolute top-5 right-5">
+                    <p key={tutorialSpan} className="absolute top-5 right-5">
                         SPAN:{" "}
                         <motion.div
-                            key={span}
+                            key={tutorialSpan}
                             className="inline font-bold text-2xl"
                             initial={{ opacity: 0, transform: "rotate(180deg)" }}
                             animate={{ opacity: 1, transform: "rotate(0)"}}
                             transition={{ duration: 1}}
                         >
-                            {span}
+                            {tutorialSpan}
                         </motion.div>
                     </p>
                 )
@@ -101,19 +103,20 @@ export default function TutorialPage() {
                 <ConditionalStep
                     condition={condition}
                     onMount={() => setGameIsOn(true)}
+                    onContinue={() => setSpan(tutorialSpan)}
                 >
                     <SpanGame
                         tutorial
-                        key={span}
-                        span={span}
+                        key={tutorialSpan}
+                        span={tutorialSpan}
                         interval={1000}
-                        onIncreaseSpan={() => setSpan((curr) => curr + 1)}
+                        onIncreaseSpan={() => setTutorialSpan((curr) => curr + 1)}
                         onCantRemember={() => setCondition(true)}
                     />
                 </ConditionalStep>
                 <Step continueAction={() => setPage(pages.dojoPage)}>
-                  <h2 className="mb-2 text-3xl font-bold">Your Span is {span}!</h2>
-                  <p>You have tested your span range and when you had to memorize {span + 1} items you had problems memorizing them.</p>
+                  <h2 className="mb-2 text-3xl font-bold">Your Span is {tutorialSpan}!</h2>
+                  <p>You have tested your span range and when you had to memorize {tutorialSpan + 1} items you had problems memorizing them.</p>
                   <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>
                   <p>If you want to practice more your span capabilities and wide your span range you can click the <code>Continue</code> button below to go to the practice Dojo and enhance your memory.</p>
                 </Step>

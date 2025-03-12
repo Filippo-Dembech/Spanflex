@@ -66,7 +66,7 @@ export default function SpanGame({
                         }}
                     />
                     {gameStatus !== status.win && (
-                        <Button className="w-70 md:w-100" onClick={() => onCantRemember()}>
+                        <Button className="w-70 m-auto md:w-100" onClick={() => onCantRemember()}>
                             Can't Remember
                         </Button>
                     )}

@@ -1,6 +1,12 @@
 # Todo
 
-- refactor: change name of `showSpeed`
+- feature: set the value of the user span when clicking on `Countinue` in tutorial page
+- fix: align `Can't Remember` button with `SpanInputs` buttons
+
+
+
+
+
 - save user parameters into local storage
 - add icons to `Increase Span` and `Retry` buttons
 - fix scrolling problem:
