@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
-import Button from "../components/Button";
 import { useUserParameters } from "../features/parameters/UserParametersContext";
-import PageLayout from "./PageLayout";
 import { FaCheckCircle } from "react-icons/fa";
 import { useFeedback } from "../hooks/useFeedback";
+
+import PageLayout from "./PageLayout";
+import NumberField from "../components/NumberField";
 import Checkbox from "../components/Checkbox";
+import Button from "../components/Button";
 
 export default function SettingsPage() {
     const { span, setSpan, showSpeed, setShowSpeed, isNumeric, setIsNumeric } =
@@ -21,31 +23,17 @@ export default function SettingsPage() {
             <div className="m-auto max-w-120">
                 <h2 className="text-3xl">Settings</h2>
                 <div className="flex flex-col space-y-3">
-                    <label htmlFor="span">Span</label>
-                    <input
+                    <NumberField
+                        label="Span"
                         ref={spanRef}
-                        className="rounded-full bg-white px-5 py-2"
-                        onChange={(e) =>
-                            e.target.value &&
-                            setInputSpan(Number(e.target.value))
-                        }
-                        type="number"
+                        onChange={(input) => setInputSpan(input)}
                         placeholder={`current = ${span}`}
-                        name="span"
-                        id="span"
                     />
-                    <label htmlFor="interval">Interval</label>
-                    <input
+                    <NumberField
+                        label="Interval"
                         ref={intervalRef}
-                        className="rounded-full bg-white px-5 py-2"
-                        onChange={(e) =>
-                            e.target.value &&
-                            setInputSpanInterval(Number(e.target.value) * 1000)
-                        }
-                        type="number"
-                        placeholder={`current = ${showSpeed / 1000}s`}
-                        name="interval"
-                        id="interval"
+                        onChange={(input) => setInputSpanInterval(input * 1000)}
+                        placeholder={`current = ${showSpeed / 1000}`}
                     />
                     <Checkbox
                         label="Numeric"
