@@ -4,7 +4,7 @@ const UserParametersContext = createContext();
 
 function UserParametersProvider({ children }) {
   const [span, setSpan] = useState(5);
-  const [showSpeed, setShowSpeed] = useState(1000);
+  const [spanInterval, setSpanInterval] = useState(1000);
   const [isNumeric, setIsNumeric] = useState(true);
   
   function increaseSpan() {
@@ -17,8 +17,8 @@ function UserParametersProvider({ children }) {
         span,
         setSpan,
         increaseSpan,
-        showSpeed,
-        setShowSpeed,
+        spanInterval,
+        setSpanInterval,
         isNumeric,
         setIsNumeric,
       }}

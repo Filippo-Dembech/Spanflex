@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function DojoPage() {
     const [attempts, setAttemps] = useState(0);
-    const { span, increaseSpan, showSpeed } = useUserParameters();
+    const { span, increaseSpan, spanInterval } = useUserParameters();
     return (
         <PageLayout className="flex items-center justify-center" gobackButton>
             <div className="absolute top-5 right-5">
@@ -24,7 +24,7 @@ export default function DojoPage() {
             <SpanGame
                 key={span + attempts}
                 span={span}
-                interval={showSpeed}
+                interval={spanInterval}
                 onIncreaseSpan={() => {
                     increaseSpan();
                     setAttemps(curr => curr + 1)

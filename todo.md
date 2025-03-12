@@ -1,7 +1,6 @@
 # Todo
 
-- refactor: features folder
-- refactor: Settings page
+- refactor: change name of `showSpeed`
 - save user parameters into local storage
 - add icons to `Increase Span` and `Retry` buttons
 - fix scrolling problem:

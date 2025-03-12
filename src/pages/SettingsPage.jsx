@@ -9,10 +9,10 @@ import Checkbox from "../components/Checkbox";
 import Button from "../components/Button";
 
 export default function SettingsPage() {
-    const { span, setSpan, showSpeed, setShowSpeed, isNumeric, setIsNumeric } =
+    const { span, setSpan, spanInterval, setSpanInterval, isNumeric, setIsNumeric } =
         useUserParameters();
     const [inputSpan, setInputSpan] = useState(span);
-    const [inputSpanInterval, setInputSpanInterval] = useState(showSpeed);
+    const [inputSpanInterval, setInputSpanInterval] = useState(spanInterval);
     const [isFeedbacking, giveFeedback] = useFeedback();
 
     const spanRef = useRef();
@@ -33,7 +33,7 @@ export default function SettingsPage() {
                         label="Interval"
                         ref={intervalRef}
                         onChange={(input) => setInputSpanInterval(input * 1000)}
-                        placeholder={`current = ${showSpeed / 1000}`}
+                        placeholder={`current = ${spanInterval / 1000}`}
                     />
                     <Checkbox
                         label="Numeric"
@@ -49,7 +49,7 @@ export default function SettingsPage() {
                         onClick={() => {
                             giveFeedback();
                             setSpan(inputSpan);
-                            setShowSpeed(inputSpanInterval);
+                            setSpanInterval(inputSpanInterval);
                             spanRef.current.value = "";
                             intervalRef.current.value = "";
                         }}
