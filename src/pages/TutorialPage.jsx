@@ -103,7 +103,7 @@ export default function TutorialPage() {
                 <ConditionalStep
                     condition={condition}
                     onMount={() => setGameIsOn(true)}
-                    onContinue={() => setSpan(tutorialSpan)}
+                    onContinue={() => setSpan(tutorialSpan - 1)}
                 >
                     <SpanGame
                         tutorial
@@ -115,10 +115,10 @@ export default function TutorialPage() {
                     />
                 </ConditionalStep>
                 <Step continueAction={() => setPage(pages.dojoPage)}>
-                  <h2 className="mb-2 text-3xl font-bold">Your Span is {tutorialSpan}!</h2>
-                  <p>You have tested your span range and when you had to memorize {tutorialSpan + 1} items you had problems memorizing them.</p>
+                  <h2 className="mb-2 text-3xl font-bold">Your Span is {tutorialSpan - 1}!</h2>
+                  <p>You have tested your span range and when you had to memorize {tutorialSpan} items you had problems memorizing them. So you can retain {tutorialSpan - 1} digits in mind.</p>
                   <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>
-                  <p>If you want to practice more your span capabilities and wide your span range you can click the <code>Continue</code> button below to go to the practice Dojo and enhance your memory.</p>
+                  <p>If you want to practice more with your span capabilities and wide your span range you can click the <code className="text-amber-500">Continue</code> button below to go to the practice Dojo and enhance your memory starting from a span of {tutorialSpan - 1}.</p>
                 </Step>
             </Stepper>
         </PageLayout>
