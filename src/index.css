@@ -38,3 +38,34 @@
     @apply relative h-screen bg-yellow-50 z-0;
   }
 }
+
+@layer utilities {
+  /* Apply to all scrollbars */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; /* For horizontal scrollbars */
+  }
+
+  /* Track (background) */
+  *::-webkit-scrollbar-track {
+    @apply bg-amber-100;
+    border-radius: 10px;
+  }
+
+  /* Handle (the draggable part) */
+  *::-webkit-scrollbar-thumb {
+    @apply bg-amber-200;
+    border-radius: 10px;
+    @apply border-2 border-amber-100;
+  }
+
+  /* Hide scrollbar arrows (for older browsers that support them) */
+  *::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  /* Optional: On hover, make scrollbar handle darker */
+  *::-webkit-scrollbar-thumb:hover {
+    @apply bg-amber-400
+  }
+}

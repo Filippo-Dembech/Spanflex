@@ -28,10 +28,13 @@ export default function TutorialPage() {
                         SPAN:{" "}
                         <motion.div
                             key={tutorialSpan}
-                            className="inline font-bold text-2xl"
-                            initial={{ opacity: 0, transform: "rotate(180deg)" }}
-                            animate={{ opacity: 1, transform: "rotate(0)"}}
-                            transition={{ duration: 1}}
+                            className="inline text-2xl font-bold"
+                            initial={{
+                                opacity: 0,
+                                transform: "rotate(180deg)",
+                            }}
+                            animate={{ opacity: 1, transform: "rotate(0)" }}
+                            transition={{ duration: 1 }}
                         >
                             {tutorialSpan}
                         </motion.div>
@@ -111,15 +114,32 @@ export default function TutorialPage() {
                         key={tutorialSpan}
                         span={tutorialSpan}
                         interval={1000}
-                        onIncreaseSpan={() => setTutorialSpan((curr) => curr + 1)}
+                        onIncreaseSpan={() =>
+                            setTutorialSpan((curr) => curr + 1)
+                        }
                         onCantRemember={() => setCondition(true)}
                     />
                 </ConditionalStep>
                 <Step onContinue={() => setPage(pages.dojoPage)}>
-                  <h2 className="mb-2 text-3xl font-bold">Your Span is {tutorialSpan - 1}!</h2>
-                  <p>You have tested your span range and when you had to memorize {tutorialSpan} items you had problems memorizing them. So you can retain {tutorialSpan - 1} digits in mind.</p>
-                  <h3 className="mt-4 mb-2 text-2xl font-semibold">Let's practice</h3>
-                  <p>If you want to practice more with your span capabilities and wide your span range you can click the <code className="text-amber-500">Continue</code> button below to go to the practice Dojo and enhance your memory starting from a span of {tutorialSpan - 1}.</p>
+                    <h2 className="mb-2 text-3xl font-bold">
+                        Your Span is {tutorialSpan - 1}!
+                    </h2>
+                    <p>
+                        You have tested your span range and when you had to
+                        memorize {tutorialSpan} items you had problems
+                        memorizing them. So you can retain {tutorialSpan - 1}{" "}
+                        digits in mind.
+                    </p>
+                    <h3 className="mt-4 mb-2 text-2xl font-semibold">
+                        Let's practice
+                    </h3>
+                    <p>
+                        If you want to practice more with your span capabilities
+                        and wide your span range you can click the{" "}
+                        <code className="text-amber-500">Continue</code> button
+                        below to go to the practice Dojo and enhance your memory
+                        starting from a span of {tutorialSpan - 1}.
+                    </p>
                 </Step>
             </Stepper>
         </PageLayout>
