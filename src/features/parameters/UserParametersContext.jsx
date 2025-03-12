@@ -1,12 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const UserParametersContext = createContext();
 
+
 function UserParametersProvider({ children }) {
-  const [span, setSpan] = useState(5);
-  const [spanInterval, setSpanInterval] = useState(1000);
+  const [span, setSpan] = useState(() => localStorage.getItem("span") || 5);
+  const [spanInterval, setSpanInterval] = useState(() => localStorage.getItem("spanInterval") || 1000);
   const [isNumeric, setIsNumeric] = useState(true);
   
+  useEffect(() => {
+    localStorage.setItem("span", span);
+  }, [span])
+  
+  useEffect(() => {
+    localStorage.setItem("spanInterval", spanInterval);
+  }, [spanInterval])
+
   function increaseSpan() {
     setSpan(curr => curr + 1);
   }
