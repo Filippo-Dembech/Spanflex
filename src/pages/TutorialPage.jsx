@@ -1,13 +1,15 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+import { pages } from "./pages";
+
+import { usePageTurner } from "../context/PageContext";
+import { useUserParameters } from "../features/parameters/UserParametersContext";
+
 import PageLayout from "./PageLayout";
 import Stepper from "../components/Stepper";
 import ConditionalStep from "../components/ConditionalStep";
 import Step from "../components/Step";
 import SpanGame from "../features/game/SpanGame";
-import { motion } from "motion/react";
-import { useState } from "react";
-import { usePageTurner } from "../context/PageContext";
-import { pages } from "./pages";
-import { useUserParameters } from "../features/parameters/UserParametersContext";
 
 export default function TutorialPage() {
     const [condition, setCondition] = useState(false);
